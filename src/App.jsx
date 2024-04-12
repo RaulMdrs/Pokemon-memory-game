@@ -2,8 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Home, Game, About, Help, ConfigureGame } from './Pages'
 import { GlobalStyles } from './Components'
 import { ErrorBoundary } from 'react-error-boundary';
-import { useEffect, useState } from "react";
-import { getRandomCards } from "./utils";
+import { useState } from "react";
 
 function App() {
   const [numberOfPairs, setNumberOfPairs] = useState(10);
