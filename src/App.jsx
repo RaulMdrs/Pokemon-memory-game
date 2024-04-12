@@ -2,14 +2,19 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Home, Game, About, Help, ConfigureGame } from './Pages'
 import { GlobalStyles } from './Components'
 import { ErrorBoundary } from 'react-error-boundary';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getRandomCards } from "./utils";
 
 function App() {
+  const [numberOfPairs, setNumberOfPairs] = useState(10);
+  const [difficulty, setDifficulty] = useState('easy');
 
-  const [numberOfPairs, setNumberOfPairs] = useState(6);
+  const defineNumberOfPairs = (n) => {
+    setNumberOfPairs(n);
+  }
 
-  const defineNumberOfPairs = (numberOfPairs) => {
-    setNumberOfPairs(numberOfPairs);
+  const defineDifficulty = (difficulty) => {
+    setDifficulty(difficulty);
   }
 
   return (
@@ -19,8 +24,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/configure-game" element={<ConfigureGame 
-            defineNumberOfPairs={defineNumberOfPairs} numberOfPairs={numberOfPairs}/>} />
-          <Route path="/game" element={<Game />} />
+            defineNumberOfPairs={defineNumberOfPairs} 
+            pairs={numberOfPairs}
+            difficulty={difficulty} 
+            setDifficulty={defineDifficulty}
+            />} />
+          <Route path="/game" element={<Game 
+            pairs={numberOfPairs} 
+            difficulty={difficulty}
+          />} />
           <Route path="/about" element={<About />} />
           <Route path="/help" element={<Help />} />
         </Routes>

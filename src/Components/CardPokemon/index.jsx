@@ -1,56 +1,44 @@
-import styled, { keyframes } from "styled-components";
-import back from '../../assets/cards/back.png';
-import front from '../../assets/cards/ampharos.png';
-import { useState } from "react";
+import { StylizedCardPokemon, CardContainer, FrontFace, BackFace } from './CardPokemon.styles';
+import { useState, useEffect } from "react";
 
-const CardContainer = styled.div`
-    perspective: 1000px;
-`;
-
-const CardFace = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    background-size: cover;
-`;
-
-const FrontFace = styled(CardFace)`
-    background-image: url(${front});
-    transform: rotateY(180deg);
-`;
-
-const BackFace = styled(CardFace)`
-    background-image: url(${back});
-`;
-
-const StylizedCardPokemon = styled.div`
-    width: 250px;
-    height: 350px;
-    transform-style: preserve-3d;
-    transition: transform 1s;
-    transform: ${({ isFlipped }) => isFlipped ? 'rotateY(180deg)' : 'rotateY(0)'};
-    cursor: pointer;
-
-    &:hover {
-        transform: scale(1.05) ${({ isFlipped }) => isFlipped ? 'rotateY(180deg)' : 'rotateY(0)'};
-        box-shadow: 0 17px 50px 0 rgba(210, 29, 189, 0.19);
-    }
-`;
-
-export const CardPokemon = () => {
+const CardPokemon = ({frontImage, id}) => {
     const [isFlipped, setIsFlipped] = useState(false);
-
+    const [dynamicFrontImage, setDynamicFrontImage] = useState(null);
+    const [loading, setLoading] = useState(true);
     const handleClick = () => {
         setIsFlipped(!isFlipped);
     };
 
+    console.log(frontImage, id);
+
+    useEffect(() => {
+        const getFrontImage = async () => {
+            try {
+                const importedImage = await import(`../../assets/cards/${frontImage}.png`);
+                setDynamicFrontImage(importedImage.default);
+                setLoading(false);
+            } catch (error) {
+                console.error("Erro ao importar imagem:", error);
+            }
+        };
+
+        getFrontImage();
+
+        return () => {
+            setDynamicFrontImage(null);
+        };
+    }, [frontImage]);
+
+
     return(
-        <CardContainer>
-            <StylizedCardPokemon onClick={handleClick} isFlipped={isFlipped}>
-                <FrontFace />
-                <BackFace />
-            </StylizedCardPokemon>
-        </CardContainer>
-    );
+        <>
+            {!loading ? (<CardContainer>
+                    <StylizedCardPokemon onClick={handleClick} isFlipped={isFlipped}>
+                        <FrontFace frontImage={dynamicFrontImage}/>
+                        <BackFace />
+                    </StylizedCardPokemon>
+                </CardContainer>) : null}
+        </>)
 };
+
+export default CardPokemon;

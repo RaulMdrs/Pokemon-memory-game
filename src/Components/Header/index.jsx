@@ -1,6 +1,6 @@
 import { Container } from './Header.styles';
 import logo from '../../assets/icons/pokemonLogo.png';
-export const Header = () => {
+const Header = () => {
     return(
         <>
             <Container>
@@ -10,3 +10,4 @@ export const Header = () => {
     )
 }
 
+export default Header;

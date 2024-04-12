@@ -13,7 +13,7 @@ background-color: black;
     gap: 30px;
 `
 
-export const StylizedButton = styled.button`
+export const StylizedOptionButton = styled.button`
     background-color: transparent;
     border: 2px solid #7d2ab4; 
     color: #8313bb; 
@@ -46,7 +46,7 @@ export const StylizedButton = styled.button`
     }
 `;
 
-export const StylizedStartButton = styled(StylizedButton)`
+export const StylizedStartButton = styled(StylizedOptionButton)`
     display: flex;
     gap: 10px;
     align-items: center;
@@ -63,7 +63,7 @@ export const StylizedStartButton = styled(StylizedButton)`
         padding: 0px;
         margin: 0px;
         font-size: 2rem;
-        
+
     }
 `;
 

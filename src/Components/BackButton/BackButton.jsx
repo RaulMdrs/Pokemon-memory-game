@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { MdArrowBack } from "react-icons/md";
 
 const StylizedButton = styled.button`
+    position: fixed;
+    top: 20px;
+    left: 20px;
     background-color: transparent;
     border: 2px solid #7d2ab4; 
     color: #8313bb; 

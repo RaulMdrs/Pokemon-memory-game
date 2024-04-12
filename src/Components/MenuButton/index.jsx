@@ -25,10 +25,12 @@ const StylizedButton = styled.button`
         font-weight: bold;
     }
 `
-export const MenuButton = ({title, onClick, height = '50px', width = '200px'}) => {
+const MenuButton = ({title, onClick, height = '50px', width = '200px'}) => {
     return(
         <>
             <StylizedButton height={height} width={width} onClick={onClick}>{title}</StylizedButton>
         </>
     )
 }
+
+export default MenuButton;

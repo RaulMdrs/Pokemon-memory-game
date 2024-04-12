@@ -1,0 +1,26 @@
+import { getRandomCards } from "../../utils";
+
+export const useShuffleCards = () => {
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
+
+    const getShuffleCards = (pairs) => {
+        const cards = getRandomCards(pairs);
+
+        const pairCards = cards.flatMap((card, index) => [
+            {id: index, frontImage: card},
+            {id: index, frontImage: card}
+        ])
+    
+        const pairShuffleCards = shuffleArray(pairCards);
+
+        return pairShuffleCards;
+    }
+
+    return [getShuffleCards]
+}   

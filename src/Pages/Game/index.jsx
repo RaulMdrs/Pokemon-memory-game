@@ -1,24 +1,15 @@
-import styled from 'styled-components'
-import {CardPokemon} from '../../Components'
+import { StylizedMain } from './Game.styles';
+import { CardPokemon } from '../../Components'
+import { getRandomCards } from '../../utils';
+import { useShuffleCards } from './useShuffleCards';
+const Game = ({pairs, difficulty}) => {
+    const [getShuffleCards] = useShuffleCards();
 
-const StylizedMain = styled.main`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    gap: 30px;
-`
-const Game = () => {
+    const cards = getShuffleCards(pairs);
+
     return(
         <StylizedMain>
-            <CardPokemon/>
-            <CardPokemon/>
-            <CardPokemon/>
-            <CardPokemon/>
-            <CardPokemon/>
-            <CardPokemon/>
+            {cards.map(card => <CardPokemon frontImage={card.frontImage} id={card.id}/>)}
         </StylizedMain>
     )
 }

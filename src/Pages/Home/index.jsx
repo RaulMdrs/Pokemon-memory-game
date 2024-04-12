@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { Header } from '../../Components'
-import { MenuButton } from '../../Components/MenuButton';
+import { MenuButton } from '../../Components';
 import backgroundImage from '../../assets/36955_pokemon.jpg';
-import { useConfigurations } from '../../Hocks/UseConfiguration/useConfig';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StylizedMain = styled.main`
     display: flex;
@@ -17,23 +15,19 @@ const StylizedMain = styled.main`
 `
 
 const Home = () => {
+    const navigate = useNavigate();
+    const goTo = (path) => {
+        navigate(path);
+    }
 
-    const [numberOfPairs, setNumberOfPairs, difficulty, setDifficulty] = useConfigurations();
-
-
-    useEffect(() => {
-      setNumberOfPairs(10);
-    }, []); 
-    
-    console.log(numberOfPairs);
     return(
         <>
             {/* <Header /> */}
             <StylizedMain>
-                <MenuButton onClick={() => window.location.href = '/configure-game'} title={'Jogar'}/>
-                <MenuButton onClick={() => window.location.href = '/about'} title={'Sobre'}/>
-                <MenuButton onClick={() => window.location.href = '/help'} title={'Ajuda'}/>
-                <MenuButton onClick={() => window.location.href = '/'}title={'Sair'}/>
+                <MenuButton onClick={() => goTo('/configure-game')} title={'Jogar'}/>
+                <MenuButton onClick={() => goTo('/about')} title={'Sobre'}/>
+                <MenuButton onClick={() => goTo('/help')} title={'Ajuda'}/>
+                <MenuButton onClick={() => goTo('/')}title={'Sair'}/>
             </StylizedMain>
         </>
     )
