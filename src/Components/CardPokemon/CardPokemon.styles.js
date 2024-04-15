@@ -34,4 +34,6 @@ export const StylizedCardPokemon = styled.div`
         transform: scale(1.05) ${({ isFlipped }) => isFlipped ? 'rotateY(180deg)' : 'rotateY(0)'};
         box-shadow: 0 17px 50px 0 rgba(210, 29, 189, 0.19);
     }
+
+    /* visibility: ${({ matched }) => matched ? 'hidden' : 'visible'}; */
 `;

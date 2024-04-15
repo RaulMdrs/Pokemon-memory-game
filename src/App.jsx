@@ -5,7 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useState } from "react";
 
 function App() {
-  const [numberOfPairs, setNumberOfPairs] = useState(10);
+  const [numberOfPairs, setNumberOfPairs] = useState(6);
   const [difficulty, setDifficulty] = useState('easy');
 
   const defineNumberOfPairs = (n) => {

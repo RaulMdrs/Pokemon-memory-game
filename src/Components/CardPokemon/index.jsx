@@ -1,15 +1,18 @@
 import { StylizedCardPokemon, CardContainer, FrontFace, BackFace } from './CardPokemon.styles';
 import { useState, useEffect } from "react";
 
-const CardPokemon = ({frontImage, id}) => {
-    const [isFlipped, setIsFlipped] = useState(false);
+const CardPokemon = ({frontImage, id, selectedCard, canFlip, matched}) => {
     const [dynamicFrontImage, setDynamicFrontImage] = useState(null);
     const [loading, setLoading] = useState(true);
     const handleClick = () => {
-        setIsFlipped(!isFlipped);
+        if (canFlip) {
+            console.log("Clicou");
+            // setIsFlipped(!isFlipped);
+            if (!isFlipped) {
+                selectedCard(id);
+            } 
+        }
     };
-
-    console.log(frontImage, id);
 
     useEffect(() => {
         const getFrontImage = async () => {
@@ -33,7 +36,7 @@ const CardPokemon = ({frontImage, id}) => {
     return(
         <>
             {!loading ? (<CardContainer>
-                    <StylizedCardPokemon onClick={handleClick} isFlipped={isFlipped}>
+                    <StylizedCardPokemon onClick={handleClick} isFlipped={isFlipped} matched={matched}>
                         <FrontFace frontImage={dynamicFrontImage}/>
                         <BackFace />
                     </StylizedCardPokemon>

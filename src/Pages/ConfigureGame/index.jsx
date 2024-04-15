@@ -1,20 +1,23 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Title, SectionButtons, SectionTitle, StylizedOptionButton, StylizedStartButton } from './ConfigureGame.styles';
 import { VscDebugStart } from "react-icons/vsc";
 import { BackButton } from '../../Components';
 import { useNavigate } from 'react-router-dom';
-const ConfigureGame = ({pairs, defineNumberOfPairs, difficulty, setDifficulty}) => {
+const ConfigureGame = ({defineNumberOfPairs, setDifficulty}) => {
     const [startEnabled, setStartEnabled] = useState(false);
+    const [numberOfPairs, setNumberOfPairs] = useState(null);
+    const [difficultyLevel, setDifficultyLevel] = useState(null);
+
     const  navigate = useNavigate();
     const handleSelectNumber = (number) => {
         defineNumberOfPairs(number);
-        checkStartEnabled(number, difficulty);
+        setNumberOfPairs(number);
     };
 
     const handleSelectDifficulty = (difficulty) => {
         setDifficulty(difficulty);
-        checkStartEnabled(pairs, difficulty);
+        setDifficultyLevel(difficulty);
     };
 
     const checkStartEnabled = (pairs, difficulty) => {
@@ -31,21 +34,25 @@ const ConfigureGame = ({pairs, defineNumberOfPairs, difficulty, setDifficulty}) 
         }
     };
 
+    useEffect(() => {
+        checkStartEnabled(numberOfPairs, difficultyLevel);
+    },[numberOfPairs, difficultyLevel]);
+
     return (
         <Container>
             <BackButton/>
             <Title>Configurações do jogo</Title>
             <SectionButtons>
                 <SectionTitle>Quantidade de cards</SectionTitle>
-                <StylizedOptionButton className={pairs === 6 ? 'selected' : ''} onClick={() => handleSelectNumber(6)}>6</StylizedOptionButton>
-                <StylizedOptionButton className={pairs === 8 ? 'selected' : ''} onClick={() => handleSelectNumber(8)}>8</StylizedOptionButton>
-                <StylizedOptionButton className={pairs === 10 ? 'selected' : ''} onClick={() => handleSelectNumber(10)}>10</StylizedOptionButton>
+                <StylizedOptionButton className={numberOfPairs === 6 ? 'selected' : ''} onClick={() => handleSelectNumber(6)}>6</StylizedOptionButton>
+                <StylizedOptionButton className={numberOfPairs === 8 ? 'selected' : ''} onClick={() => handleSelectNumber(8)}>8</StylizedOptionButton>
+                <StylizedOptionButton className={numberOfPairs === 10 ? 'selected' : ''} onClick={() => handleSelectNumber(10)}>10</StylizedOptionButton>
             </SectionButtons>
             <SectionButtons>
                 <SectionTitle>Dificuldade</SectionTitle>
-                <StylizedOptionButton className={difficulty === 'Fácil' ? 'selected' : ''} onClick={() => handleSelectDifficulty('Fácil')}>Fácil</StylizedOptionButton>
-                <StylizedOptionButton className={difficulty === 'Médio' ? 'selected' : ''} onClick={() => handleSelectDifficulty('Médio')}>Médio</StylizedOptionButton>
-                <StylizedOptionButton className={difficulty === 'Difícil' ? 'selected' : ''} onClick={() => handleSelectDifficulty('Difícil')}>Difícil</StylizedOptionButton>
+                <StylizedOptionButton className={difficultyLevel === 'easy' ? 'selected' : ''} onClick={() => handleSelectDifficulty('easy')}>Fácil</StylizedOptionButton>
+                <StylizedOptionButton className={difficultyLevel === 'normal' ? 'selected' : ''} onClick={() => handleSelectDifficulty('normal')}>Médio</StylizedOptionButton>
+                <StylizedOptionButton className={difficultyLevel === 'hard' ? 'selected' : ''} onClick={() => handleSelectDifficulty('hard')}>Difícil</StylizedOptionButton>
             </SectionButtons>
             <StylizedStartButton disabled={!startEnabled} onClick={handleStartGame}>
                 <VscDebugStart size={30} />
