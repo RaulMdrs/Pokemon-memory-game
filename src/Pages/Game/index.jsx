@@ -53,7 +53,9 @@ const Game = ({pairs, difficulty, addToLeaderboard, name}) => {
         if(!endGame && timer >= maxTimer){
             setEndGame(true);
             setTimeout(() => {
-                handleOpenModal();
+                if(!victory){
+                    handleOpenModal();
+                }
             }, 1000)
             
         }

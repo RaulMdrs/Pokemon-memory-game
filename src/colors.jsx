@@ -9,7 +9,7 @@ const colors = {
     buttonHover: '#a53fc4',
     white: '#fff',
     black: '#000',
-    backgroundModal: '#444444'
+    backgroundModal: '#7c7c7c'
 };
 
 export default colors;

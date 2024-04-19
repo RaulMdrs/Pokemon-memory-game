@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalContent, ModalOverlay, CloseButton, StylizedImg } from './EndGameModal.styles';
+import { ModalContent, ModalOverlay, CloseButton, StylizedImg, StylizedText } from './EndGameModal.styles';
 import { useNavigate } from 'react-router-dom';
 import gif from '../../assets/gifs/umbreon.gif';
 import duskull from '../../assets/images/duskull.png';
@@ -26,16 +26,16 @@ const Modal = ({ isOpen, points, victory = true, name = 'player', addLeaderboard
             return(
                 <ModalContent>
                     <StylizedImg src={gif} />
-                    <p>Parabéns, você venceu!</p>
-                    <p>Seu score foi de {points} pontos.</p>
+                    <StylizedText>Parabéns, você venceu!</StylizedText>
+                    <StylizedText>Adicionamos seu score de {points} pontos ao placar de líderes.</StylizedText>
                     <CloseButton onClick={backToMenu}>Voltar para o menu</CloseButton>
                 </ModalContent>)
         } else {
             return( 
                 <ModalContent>
                     <StylizedImg src={duskull} />
-                    <p>Infelizmente voce perdeu!</p>
-                    <p>Seu score foi de {points} pontos.</p>
+                    <StylizedText>Infelizmente voce perdeu!</StylizedText>
+                    <StylizedText>Seu score foi de {points} pontos.</StylizedText>
                     <CloseButton onClick={backToMenu}>Voltar para o menu</CloseButton>
                 </ModalContent>
             )

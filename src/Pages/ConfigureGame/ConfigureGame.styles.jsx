@@ -8,7 +8,7 @@ export const Container = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     gap: 30px;
 `
@@ -22,6 +22,7 @@ export const StylizedOptionButton = styled.button`
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-weight: 800;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;

@@ -3,6 +3,7 @@ import { Home, Game, About, LeaderboardPage, ConfigureGame, NotFound } from './P
 import { GlobalStyles } from './Components'
 import { ErrorBoundary } from 'react-error-boundary';
 import { useState, useEffect } from "react";
+import MusicPlayer from './Components/MusicPlayer';
 import musicTower from './assets/sounds/PokemonTower.mp3';
 import musicLavander from './assets/sounds/PokemonLavanderTown.mp3';
 
@@ -12,30 +13,7 @@ function App() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [name, setName] = useState('');
   const [musicIndex, setMusicIndex] = useState(0);
-
   const musicTheme = [musicLavander, musicTower];
-
-  useEffect(() => {
-    const audio = new Audio(musicTheme[musicIndex]);
-    audio.volume = 0.01;
-
-    const handleMusicEnd = () => {
-      const nextMusicIndex = (musicIndex + 1) % musicTheme.length;
-      setMusicIndex(nextMusicIndex); 
-      audio.src = musicTheme[nextMusicIndex]; 
-      console.log(musicTheme[nextMusicIndex]);
-      audio.play();
-    };
-
-    audio.addEventListener('ended', handleMusicEnd);
-
-    audio.play();
-
-    return () => {
-      audio.removeEventListener('ended', handleMusicEnd);
-      audio.pause();
-    };
-  }, [musicIndex, musicTheme]);
   
   useEffect(() => {
     const storedLeaderboardData = JSON.parse(localStorage.getItem('leaderboardData'));
@@ -67,6 +45,7 @@ function App() {
     <ErrorBoundary>
       <GlobalStyles/>
       <Router>
+        <MusicPlayer musicTheme={musicTheme}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/configure-game" element={<ConfigureGame 

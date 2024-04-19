@@ -48,3 +48,10 @@ export const StylizedImg = styled.img`
     height: 30%;
     width: auto;
 `
+
+export const StylizedText = styled.p`
+    font-size: 1.4rem;
+    color: ${colors.black};
+    font-weight: 500;
+    text-align: center;
+`
