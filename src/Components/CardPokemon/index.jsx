@@ -1,17 +1,11 @@
 import { StylizedCardPokemon, CardContainer, FrontFace, BackFace } from './CardPokemon.styles';
 import { useState, useEffect } from "react";
 
-const CardPokemon = ({frontImage, id, selectedCard, canFlip, matched}) => {
+const CardPokemon = ({size = 'medium' ,frontImage, id, pairId, selectedCard, matched, flipped}) => {
     const [dynamicFrontImage, setDynamicFrontImage] = useState(null);
     const [loading, setLoading] = useState(true);
     const handleClick = () => {
-        if (canFlip) {
-            console.log("Clicou");
-            // setIsFlipped(!isFlipped);
-            if (!isFlipped) {
-                selectedCard(id);
-            } 
-        }
+        selectedCard(id, pairId);
     };
 
     useEffect(() => {
@@ -32,11 +26,37 @@ const CardPokemon = ({frontImage, id, selectedCard, canFlip, matched}) => {
         };
     }, [frontImage]);
 
+    const defineWidth = () => {
+        switch (size) {
+            case 'small':
+                return '160px';
+            case 'medium':
+                return '200px';
+            case 'large':
+                return '230px';
+            default:
+                return '160px';
+        }
+    }
+
+    const defineHeight = () => {
+        switch (size) {
+            case 'small':
+                return '224px';
+            case 'medium':
+                return '280px';
+            case 'large':
+                return '322px';
+            default:
+                return '280px';
+        }
+    }
 
     return(
         <>
             {!loading ? (<CardContainer>
-                    <StylizedCardPokemon onClick={handleClick} isFlipped={isFlipped} matched={matched}>
+                    <StylizedCardPokemon onClick={handleClick} isFlipped={flipped} 
+                        matched={matched} height = {defineHeight()} width = {defineWidth()}>
                         <FrontFace frontImage={dynamicFrontImage}/>
                         <BackFace />
                     </StylizedCardPokemon>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getRandomCards } from "../../utils";
-
+import { v4 as uuidv4 } from 'uuid';
 export const useShuffleCards = () => {
     const [CardsData, setCardsData] = useState([]);
 
@@ -15,13 +15,13 @@ export const useShuffleCards = () => {
     const getShuffleCards = (pairs) => {
         const cards = getRandomCards(pairs);
         const initialCardsData = cards.flatMap((card, index) => [
-            {   id: index, 
+            {   id: uuidv4(), 
                 pairId: index,
                 frontImage: card, 
                 matched: false,
                 flipped: false
             },
-            {   id: index, 
+            {   id: uuidv4(), 
                 pairId: index,
                 frontImage: card, 
                 matched: false,
@@ -32,16 +32,15 @@ export const useShuffleCards = () => {
         setCardsData(shuffleArray(initialCardsData));
     }
 
-    const handleClickCard = (cardId) => {
+    const handleClickCard = (cardIds) => {
         const updatedCardsData = CardsData.map(card => {
-            if (card.id===cardId) {
-                return {...card, flipped: !card.flipped }
+            if (cardIds.includes(card.id)) {
+                return {...card, flipped: !card.flipped };
             } else {
                 return card;
             }
-        })
+        });
         setCardsData(updatedCardsData);
     }
-
     return [CardsData, handleClickCard, getShuffleCards]
 }   

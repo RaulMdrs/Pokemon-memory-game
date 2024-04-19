@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MenuButton } from '../../Components';
-import backgroundImage from '../../assets/36955_pokemon.jpg';
+import backgroundImage from '../../assets/backgrounds/36955_pokemon.jpg';
 import { useNavigate } from 'react-router-dom';
+import useSound from '../../Hocks/UseSound/useSound';
+import clickAudio from '../../assets/sounds/click.wav';
+import selectAudio from '../../assets/sounds/select.wav';
+import musicTheme from '../../assets/sounds/PokemonLavanderTown.mp3';
 
 const StylizedMain = styled.main`
     display: flex;
@@ -19,8 +23,11 @@ const Home = () => {
     const navigate = useNavigate();
     const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
     const [isFocused, setIsFocused] = useState(false);
+    const clickSound = useSound(clickAudio);
+    const selectedSound = useSound(selectAudio);
 
     useEffect(() => {
+        selectedSound();
         const handleKeyDown = (event) => {
             if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
                 setCurrentButtonIndex((prevIndex) => (prevIndex - 1 + 4) % 4);
@@ -42,15 +49,16 @@ const Home = () => {
     }
 
     const handleButtonClick = (index) => {
+        clickSound();
         switch (index) {
             case 0:
                 goTo('/configure-game');
                 break;
             case 1:
-                goTo('/about');
+                goTo('/leaderboard');
                 break;
             case 2:
-                goTo('/help');
+                goTo('/about');
                 break;
             case 3:
                 goTo('/');
@@ -77,13 +85,13 @@ const Home = () => {
                 <MenuButton
                     onClick={() => handleButtonClick(1)}
                     onFocus={() => handleFocus(1)}
-                    title={'Sobre'}
+                    title={'Líderes'}
                     isFocused={currentButtonIndex === 1}
                 />
                 <MenuButton
                     onClick={() => handleButtonClick(2)}
                     onFocus={() => handleFocus(2)}
-                    title={'Ajuda'}
+                    title={'Como jogar'}
                     isFocused={currentButtonIndex === 2}
                 />
                 <MenuButton

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { Container, Title, SectionButtons, SectionTitle, StylizedOptionButton, StylizedStartButton } from './ConfigureGame.styles';
+import { Container, Title, SectionButtons, SectionTitle, StylizedOptionButton, StylizedStartButton, StylizedInput } from './ConfigureGame.styles';
 import { VscDebugStart } from "react-icons/vsc";
 import { BackButton } from '../../Components';
 import { useNavigate } from 'react-router-dom';
-const ConfigureGame = ({defineNumberOfPairs, setDifficulty}) => {
+const ConfigureGame = ({defineNumberOfPairs, setDifficulty, name, setName}) => {
     const [startEnabled, setStartEnabled] = useState(false);
     const [numberOfPairs, setNumberOfPairs] = useState(null);
     const [difficultyLevel, setDifficultyLevel] = useState(null);
@@ -21,7 +21,7 @@ const ConfigureGame = ({defineNumberOfPairs, setDifficulty}) => {
     };
 
     const checkStartEnabled = (pairs, difficulty) => {
-        if (pairs !== null && difficulty !== null) {
+        if (pairs !== null && difficulty !== null && name !== '') {
             setStartEnabled(true);
         } else {
             setStartEnabled(false);
@@ -42,6 +42,7 @@ const ConfigureGame = ({defineNumberOfPairs, setDifficulty}) => {
         <Container>
             <BackButton/>
             <Title>Configurações do jogo</Title>
+            <StylizedInput type="text" value={name} placeholder='Digite seu nome...' onChange={(e) => setName(e.target.value)}/>
             <SectionButtons>
                 <SectionTitle>Quantidade de cards</SectionTitle>
                 <StylizedOptionButton className={numberOfPairs === 6 ? 'selected' : ''} onClick={() => handleSelectNumber(6)}>6</StylizedOptionButton>

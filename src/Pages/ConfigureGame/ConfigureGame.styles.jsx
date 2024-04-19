@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import backgroundImage from '../../assets/36955_pokemon.jpg';
+import colors from '../../colors';
 
 export const Container = styled.main`
-background-color: black;
+    background-color: ${colors.background};
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -15,8 +15,8 @@ background-color: black;
 
 export const StylizedOptionButton = styled.button`
     background-color: transparent;
-    border: 2px solid #7d2ab4; 
-    color: #8313bb; 
+    border: 2px solid ${colors.primary}; 
+    color: ${colors.secondary}; 
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -31,9 +31,9 @@ export const StylizedOptionButton = styled.button`
 
     
     &:hover {
-        background-color: #a53fc4; 
+        background-color: ${colors.primary}; 
         color: white;
-        border: 2px solid #7d2ab4;
+        border: 2px solid ${colors.accent};
         transform: scale(1.05);
         box-shadow:0 17px 50px 0 rgba(210, 29, 189, 0.19);
         font-weight: bold;
@@ -68,13 +68,13 @@ export const StylizedStartButton = styled(StylizedOptionButton)`
 `;
 
 export const SectionTitle = styled.h2`
-    color: #8313bb;
+    color: ${colors.title};
     font-size: 20px;
     margin-bottom: 10px;
 `;
 
 export const Title = styled.h1`
-    color: #8313bb;
+    color: ${colors.title};
     font-size: 40px;
     margin-bottom: 10px;
 `;
@@ -83,4 +83,21 @@ export const SectionButtons = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+`;
+
+export const StylizedInput = styled.input`
+    border: 2px solid ${colors.primary}; 
+    color: ${colors.secondary}; 
+    background-color: ${colors.background};
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: text;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+    width: 300px;
+    height: 20px;
 `;
