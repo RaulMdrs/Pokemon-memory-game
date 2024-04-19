@@ -6,6 +6,7 @@ const useSound = (soundFile) => {
     const playSound = () => {
         const audio = audioRef.current;
         audio.currentTime = 0;
+        audio.volume = 0.05;
         audio.play();
     };
 

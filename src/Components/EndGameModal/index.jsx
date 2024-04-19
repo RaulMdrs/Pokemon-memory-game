@@ -5,14 +5,16 @@ import gif from '../../assets/gifs/umbreon.gif';
 import duskull from '../../assets/images/duskull.png';
 
 
-const Modal = ({ isOpen, points, victory = true, name = 'player', addLeaderboard}) => {
+const Modal = ({ isOpen, points, victory = true, name = 'player', addLeaderboard, difficulty = 'easy', pairs = 6}) => {
     const navigate = useNavigate();
 
     const backToMenu = () => {
         if(victory) {
             const objectLeaderBoard = {
                 name: name,
-                points: points
+                points: points,
+                difficulty: difficulty,
+                pairs: pairs
             }
             addLeaderboard(objectLeaderBoard);
         }

@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Home, Game, About, LeaderboardPage, ConfigureGame } from './Pages'
+import { Home, Game, About, LeaderboardPage, ConfigureGame, NotFound } from './Pages'
 import { GlobalStyles } from './Components'
 import { ErrorBoundary } from 'react-error-boundary';
 import { useState, useEffect } from "react";
@@ -43,7 +43,8 @@ function App() {
       setLeaderboard(storedLeaderboardData);
     } else {
       setLeaderboard([
-        { name: 'Desenvoledor', points: 50 },
+        { name: 'Ash', points: 420, difficulty: 'easy', pairs: 6 },
+        { name: 'Oak', points: 570, difficulty: 'hard', pairs: 10 },
       ]);
     }
   }, []); 
@@ -86,6 +87,7 @@ function App() {
             leaderboard={leaderboard}
             />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </ErrorBoundary>

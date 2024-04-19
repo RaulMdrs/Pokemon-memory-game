@@ -54,6 +54,8 @@ const LeaderboardPage = ({ leaderboard }) => {
                         <LeaderboardTableHeader>Posição</LeaderboardTableHeader>
                         <LeaderboardTableHeader>Nome</LeaderboardTableHeader>
                         <LeaderboardTableHeader>Pontuação</LeaderboardTableHeader>
+                        <LeaderboardTableHeader>Dificuldade</LeaderboardTableHeader>
+                        <LeaderboardTableHeader>Pares</LeaderboardTableHeader>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +64,8 @@ const LeaderboardPage = ({ leaderboard }) => {
                             <LeaderboardTableCell>{index + 1}</LeaderboardTableCell>
                             <LeaderboardTableCell>{player.name}</LeaderboardTableCell>
                             <LeaderboardTableCell>{player.points}</LeaderboardTableCell>
+                            <LeaderboardTableCell>{player.difficulty}</LeaderboardTableCell>
+                            <LeaderboardTableCell>{player.pairs}</LeaderboardTableCell>
                         </LeaderboardTableRow>
                     ))}
                 </tbody>

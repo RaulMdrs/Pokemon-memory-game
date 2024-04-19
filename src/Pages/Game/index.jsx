@@ -143,6 +143,8 @@ const Game = ({pairs, difficulty, addToLeaderboard, name}) => {
                 victory={victory}
                 addLeaderboard={addToLeaderboard}
                 name={name}
+                difficulty={difficulty}
+                pairs={pairs}
                 />
             {renderCards()}
             </StylizedMain>
